@@ -12,7 +12,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Set up the model configuration for text generation
 generation_config = {
-    "temperature": 0.4,
+    "temperature": 0.3,
     "top_p": 1,
     "top_k": 32,
     "max_output_tokens": 4096,
@@ -49,19 +49,15 @@ def generate_gemini_response(prompt, image_path):
 
 # Initial input prompt for the plant pathologist
 input_prompt = """
-As a highly skilled plant pathologist, your expertise is indispensable in our pursuit of maintaining optimal plant health. You will be provided with information or samples related to plant diseases, and your role involves conducting a detailed analysis to identify the specific issues, propose solutions, and offer recommendations.
+As a highly skilled plant pathologist, your expertise is indispensable in our pursuit of maintaining optimal plant health. You will be provided with a plant photo related to plant diseases, and your role involves conducting a detailed analysis to identify the specific issues, propose solutions, and offer recommendations.
 
 **Analysis Guidelines:**
 
-1. **Disease Identification:** Examine the provided information or samples to identify and characterize plant diseases accurately.
+1. **Disease Identification:** Examine the provided image to identify accurately and characterize the plant and the disease.
 
 2. **Detailed Findings:** Provide in-depth findings on the nature and extent of the identified plant diseases, including affected plant parts, symptoms, and potential causes.
 
-3. **Next Steps:** Outline the recommended course of action for managing and controlling the identified plant diseases. This may involve treatment options, preventive measures, or further investigations.
-
 4. **Recommendations:** Offer informed recommendations for maintaining plant health, preventing disease spread, and optimizing overall plant well-being.
-
-5. **Important Note:** As a plant pathologist, your insights are vital for informed decision-making in agriculture and plant management. Your response should be thorough, concise, and focused on plant health.
 
 **Disclaimer:**
 *"Please note that the information provided is based on plant pathology analysis and should not replace professional agricultural advice. Consult with qualified agricultural experts before implementing any strategies or treatments."*
@@ -92,3 +88,25 @@ with gr.Blocks() as demo:
 
 # Launch the Gradio interface with debug mode enabled
 demo.launch(debug=True)
+
+"""
+As a highly skilled plant pathologist, your expertise is indispensable in our pursuit of maintaining optimal plant health. You will be provided with information or samples related to plant diseases, and your role involves conducting a detailed analysis to identify the specific issues, propose solutions, and offer recommendations.
+Here is a list of diseases for peanut in our dataset: 'ALTERNARIA LEAF SPOT','HEALTHY','LEAF SPOT (EARLY AND LATE)','ROSETTE','RUST'
+
+**Analysis Guidelines:**
+
+1. **Disease Identification:** Examine the provided information or samples to identify and characterize plant diseases accurately.
+
+2. **Detailed Findings:** Provide in-depth findings on the nature and extent of the identified plant diseases, including affected plant parts, symptoms, and potential causes.
+
+3. **Next Steps:** Outline the recommended course of action for managing and controlling the identified plant diseases. This may involve treatment options, preventive measures, or further investigations.
+
+4. **Recommendations:** Offer informed recommendations for maintaining plant health, preventing disease spread, and optimizing overall plant well-being.
+
+5. **Important Note:** As a plant pathologist, your insights are vital for informed decision-making in agriculture and plant management. Your response should be thorough, concise, and focused on plant health.
+
+**Disclaimer:**
+*"Please note that the information provided is based on plant pathology analysis and should not replace professional agricultural advice. Consult with qualified agricultural experts before implementing any strategies or treatments."*
+
+Your role is pivotal in ensuring the health and productivity of plants. Proceed to analyze the provided information or samples, adhering to the structured 
+"""
