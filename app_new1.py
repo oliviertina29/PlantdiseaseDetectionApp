@@ -24,12 +24,13 @@ safety_settings = [
     for category in ["HARASSMENT", "HATE_SPEECH", "SEXUALLY_EXPLICIT", "DANGEROUS_CONTENT"]
 ]
 
-# Initialize the GenerativeModel with the specified model name, configuration, and safety settings
+# Initialize the GenerativeModel with the new model name, configuration, and safety settings
 model = genai.GenerativeModel(
-    model_name="gemini-pro-vision",
+    model_name="gemini-1.5-flash",  # Updated model name
     generation_config=generation_config,
     safety_settings=safety_settings,
 )
+
 # Function to read image data from a file path
 def read_image_data(file_path):
     image_path = Path(file_path)
@@ -39,9 +40,12 @@ def read_image_data(file_path):
 
 # Function to generate a response based on a prompt and an image path
 def generate_gemini_response(prompt, image_path):
-    image_data = read_image_data(image_path)
-    response = model.generate_content([prompt, image_data])
-    return response.text
+    try:
+        image_data = read_image_data(image_path)
+        response = model.generate_content([prompt, image_data])
+        return response.text
+    except Exception as e:
+        return f"An error occurred while generating content: {e}"
 
 # Initial input prompt for the plant pathologist
 input_prompt = """
@@ -83,7 +87,7 @@ with gr.Blocks() as demo:
         file_types=["image"],
         file_count="multiple",
     )
-     # Set up the upload button to trigger the processing function
+    # Set up the upload button to trigger the processing function
     upload_button.upload(process_uploaded_files, upload_button, combined_output)
 
 # Launch the Gradio interface with debug mode enabled
